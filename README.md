@@ -93,10 +93,16 @@ module.exports = {
 };
 ```
 
- Add a "start" script in your package.json
+ Add a start script in your package.json and babel presets:
  
  ```
  "scripts": {
     "start": "webpack-dev-server --open"
   }
+```
+
+```
+  "babel": {
+    "presets": ["env", "react"]
+  }
 ```
