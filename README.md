@@ -29,6 +29,7 @@ dist
 
 Create an app folder to write your code, with index.js and index.css files.
 
+(index.html)
 ```
 <!DOCTYPE html>
 <html>
@@ -44,9 +45,28 @@ Create an app folder to write your code, with index.js and index.css files.
 
 </html>
 ```
-
+(index.css)
 ```
-// index.js
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+```
+(index.js)
+```
 import React from "react";
 import ReactDOM from "react-dom";
 require("./index.css");
@@ -120,14 +140,11 @@ function SelectLanguage(props) {
   return (
     <ul className="languages">
       {languages.map(function(lang) {
+        var highlight =
+          lang === props.selectedLanguage ? { color: "#d0021b" } : null;
+        var handleClick = props.onSelect.bind(null, lang);
         return (
-          <li
-            style={
-              lang === props.selectedLanguage ? { color: "#d0021b" } : null
-            }
-            onClick={props.onSelect.bind(null, lang)}
-            key={lang}
-          >
+          <li style={highlight} onClick={handleClick} key={lang}>
             {lang}
           </li>
         );
@@ -150,6 +167,7 @@ class Popular extends React.Component {
 
     this.updateLanguage = this.updateLanguage.bind(this);
   }
+
   updateLanguage(lang) {
     this.setState(function() {
       return {
@@ -157,6 +175,7 @@ class Popular extends React.Component {
       };
     });
   }
+
   render() {
     return (
       <div>
