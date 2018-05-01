@@ -29,27 +29,41 @@ dist
 
 Create an app folder to write your code, with index.js and index.css files.
 
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Github Battle</title>
+</head>
+
+<body>
+  <div id='app'></div>
+</body>
+
+</html>
+```
 
 ```
 // index.js
-
 import React from "react";
-var Popular = require("./Popular");
+import ReactDOM from "react-dom";
+require("./index.css");
 
 class App extends React.Component {
   render() {
-    return (
-      <div className="container">
-      </div>
-    );
+    return <div> Hello World! </div>;
   }
 }
 
-module.exports = App;
+ReactDOM.render(<App />, document.getElementById("app"));
+
+
 ```
 
 
-Creat the configuration file for webpack
+Create the configuration file for webpack
 
 
 
@@ -83,7 +97,6 @@ module.exports = {
  
  ```
  "scripts": {
-    "create": "webpack",
     "start": "webpack-dev-server --open"
   }
 ```
