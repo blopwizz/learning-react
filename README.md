@@ -190,3 +190,31 @@ class Popular extends React.Component {
 
 module.exports = Popular;
 ```
+
+
+### Making AJAX requests
+
+Install axios
+```
+npm install --save axios
+```
+
+Create a utils folder and a api.js file
+
+(app/utils/api.js)
+```
+var axios = require("axios");
+
+module.exports = {
+  fetchPopularRepos function(language) {
+    var encodedURI = window.encode(URI('https://api.github.com/search/repositories?q=stars:>1+language:'+language+'&sort=stars&order=desc'))
+    return axios.get(encodedURI)
+    .then(function(response) {
+      return response.data.items;
+    });
+  }
+}
+
+```
+
+
