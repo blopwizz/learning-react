@@ -125,9 +125,8 @@ And this will produce a flow chart:
 ```mermaid
 graph LR
 A --> C(Round Rect)
-B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNjQwMDddfQ==
+eyJoaXN0b3J5IjpbLTUxODU0NTc0MV19
 -->
