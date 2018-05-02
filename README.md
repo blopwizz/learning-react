@@ -194,6 +194,11 @@ module.exports = Popular;
 
 ### Making AJAX requests
 
+Play with the API http request in the browser
+```
+https://api.github.com/search/repositories?q=stars:%3E10000+language:JavaScript&sort=stars&order=desc
+```
+
 Install axios
 ```
 npm install --save axios
@@ -206,15 +211,62 @@ Create a utils folder and a api.js file
 var axios = require("axios");
 
 module.exports = {
-  fetchPopularRepos function(language) {
-    var encodedURI = window.encode(URI('https://api.github.com/search/repositories?q=stars:>1+language:'+language+'&sort=stars&order=desc'))
-    return axios.get(encodedURI)
-    .then(function(response) {
+  fetchPopularRepos: function(language) {
+    var encodedURI = window.encode(
+      URI(
+        "https://api.github.com/search/repositories?q=stars:>1+language:" +
+          language +
+          "&sort=stars&order=desc"
+      )
+    );
+    return axios.get(encodedURI).then(function(response) {
       return response.data.items;
     });
   }
-}
-
+};
 ```
 
+Add repos in state
+
+Import api.js functions
+```
+var api = require("../utils/api");
+```
+
+Test, initialize, adapt, implement, verify
+
+```
+api.fetchPopularRepos(lang).then(function(response) {
+    console.log(response);
+});
+```
+
+(initialize)
+```
+componentDidMount() {
+    this.selectLanguage(this.state.selectedLanguage);
+  }
+```
+
+(implement)
+```
+api.fetchPopularRepos(lang).then(
+      function(response) {
+        this.setState(function() {
+          return {
+            repos: response
+          };
+        });
+      }.bind(this)
+    );
+```
+
+(verify)
+```
+{JSON.stringify(this.state.repos)}
+```
+
+
+###
+UI 11:11
 
