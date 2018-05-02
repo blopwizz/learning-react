@@ -267,8 +267,12 @@ api.fetchPopularRepos(lang).then(
 ```
 
 
-###
-UI 11:11
+### React Router
+ Begin here : https://reacttraining.com/react-router/web/guides/philosophy
+ and get familiar with the various given examples.
+
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTEwMzY0NDA0XX0=
+eyJoaXN0b3J5IjpbMTI5NzMxMTc1Myw1MTAzNjQ0MDRdfQ==
 -->
