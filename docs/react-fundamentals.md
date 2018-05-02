@@ -1,61 +1,274 @@
-# Welcome to StackEdit!
+# learning-react
 
-Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. If you have finished with me, you can just create new files by opening the **file explorer** on the left corner of the navigation bar.
+### Getting Started - Custom configuration with Webpack 4
+
+Create your workspace
+
+```
+mkdir myApp
+cd myApp
+```
+
+Initiate an app project with npm, an install the dependencies
+
+```
+npm init
+npm install --save react react-dom
+npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-react css-loader style-loader html-webpack-plugin webpack webpack-dev-server webpack-cli
+```
+
+Ignore node modules and bundled code in Git 
+
+```
+nano .gitignore
+```
+```
+node_modules
+dist
+```
+
+Create an app folder to write your code, with index.js and index.css files.
+
+(index.html)
+```
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Github Battle</title>
+</head>
+
+<body>
+  <div id='app'></div>
+</body>
+
+</html>
+```
+(index.css)
+```
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+```
+(index.js)
+```
+import React from "react";
+import ReactDOM from "react-dom";
+require("./index.css");
+
+class App extends React.Component {
+  render() {
+    return <div> Hello World! </div>;
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("app"));
 
 
-# Files
-
-StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible **offline!**
-
-## Create files and folders
-
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
-
-## Switch to another file
-
-All your files are listed in the file explorer. You can switch from one to another by clicking a file in the list.
-
-## Rename a file
-
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
-
-## Delete a file
-
-You can delete the current file by clicking the **Remove** button in the file explorer. The file will be moved into the **Trash** folder and automatically deleted after 7 days of inactivity.
-
-## Export a file
-
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
+```
 
 
-# Synchronization
+Create the configuration file for webpack
 
-Synchronization is one of the biggest features of StackEdit. It enables you to synchronize any file in your workspace with other files stored in your **Google Drive**, your **Dropbox** and your **GitHub** accounts. This allows you to keep writing on other devices, collaborate with people you share the file with, integrate easily into your workflow... The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.
 
-There are two types of synchronization and they can complement each other:
 
-- The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
-	> To start syncing your workspace, just sign in with Google in the menu.
+```
+// webpack.config.js
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-- The file synchronization will keep one file of the workspace synced with one or multiple files in **Google Drive**, **Dropbox** or **GitHub**.
-	> Before starting to sync files, you must link an account in the **Synchronize** sub-menu.
+module.exports = {
+	entry: './app/index.js',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'index_bundle.js'
+	},
+	module: {
+		rules: [
+			{ test: /\.(js)$/, use: 'babel-loader' },
+			{ test: /\.css$/, use: ['style-loader', 'css-loader'] }
+		]
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: 'app/index.html'
+		})
+	],
+	mode: "development"
+};
+```
 
-## Open a file
+ Add a start script in your package.json and babel presets:
+ 
+ ```
+ "scripts": {
+    "start": "webpack-dev-server --open"
+  }
+```
 
-You can open a file from **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Open from**. Once opened in the workspace, any modification in the file will be automatically synced.
+```
+  "babel": {
+    "presets": ["env", "react"]
+  }
+```
 
-## Save a file
 
-You can save any file of the workspace to **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Save on**. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.
 
-## Synchronize a file
+### Define a new component
 
-Once your file is linked to a synchronized location, StackEdit will periodically synchronize it by downloading/uploading any modification. A merge will be performed if necessary and conflicts will be resolved.
+```
+var React = require("react");
+var PropTypes = require("prop-types");
 
-If you just have modified your file and you want to force syncing, click the **Synchronize now** button in the navigation bar.
+function SelectLanguage(props) {
+  var languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
+  return (
+    <ul className="languages">
+      {languages.map(function(lang) {
+        var highlight =
+          lang === props.selectedLanguage ? { color: "#d0021b" } : null;
+        var handleClick = props.onSelect.bind(null, lang);
+        return (
+          <li style={highlight} onClick={handleClick} key={lang}>
+            {lang}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
-> **Note:** The **Synchronize now** button is disabled if you have no file to synchronize.
+SelectLanguage.propTypes = {
+  selectedLanguage: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired
+};
 
+class Popular extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      selectedLanguage: "All"
+    };
+
+    this.updateLanguage = this.updateLanguage.bind(this);
+  }
+
+  updateLanguage(lang) {
+    this.setState(function() {
+      return {
+        selectedLanguage: lang
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <SelectLanguage
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage}
+        />
+      </div>
+    );
+  }
+}
+
+module.exports = Popular;
+```
+
+
+### Making AJAX requests
+
+Play with the API http request in the browser
+```
+https://api.github.com/search/repositories?q=stars:%3E10000+language:JavaScript&sort=stars&order=desc
+```
+
+Install axios
+```
+npm install --save axios
+```
+
+Create a utils folder and a api.js file
+
+(app/utils/api.js)
+```
+var axios = require("axios");
+
+module.exports = {
+  fetchPopularRepos: function(language) {
+    var encodedURI = window.encode(
+      URI(
+        "https://api.github.com/search/repositories?q=stars:>1+language:" +
+          language +
+          "&sort=stars&order=desc"
+      )
+    );
+    return axios.get(encodedURI).then(function(response) {
+      return response.data.items;
+    });
+  }
+};
+```
+
+Add repos in state
+
+Import api.js functions
+```
+var api = require("../utils/api");
+```
+
+Test, initialize, adapt, implement, verify
+
+```
+api.fetchPopularRepos(lang).then(function(response) {
+    console.log(response);
+});
+```
+
+(initialize)
+```
+componentDidMount() {
+    this.selectLanguage(this.state.selectedLanguage);
+  }
+```
+
+(implement)
+```
+api.fetchPopularRepos(lang).then(
+      function(response) {
+        this.setState(function() {
+          return {
+            repos: response
+          };
+        });
+      }.bind(this)
+    );
+```
+
+(verify)
+```
+{JSON.stringify(this.state.repos)}
+```
+
+
+###
+UI 11:11
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzExMjY2NDY1XX0=
+eyJoaXN0b3J5IjpbNTEwMzY0NDA0XX0=
 -->
