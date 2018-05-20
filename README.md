@@ -217,7 +217,7 @@ Play with the API http request in the browser
 https://api.github.com/search/repositories?q=stars:%3E10000+language:JavaScript&sort=stars&order=desc
 ```
 
-Install axios
+Install **axios**
 ```
 npm install --save axios
 ```
@@ -288,5 +288,5 @@ api.fetchPopularRepos(lang).then(
 UI 11:11
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2NTM3MTYyMiwxODUwOTA5NDEyXX0=
+eyJoaXN0b3J5IjpbMzUyMDQxNTc0LDE4NTA5MDk0MTJdfQ==
 -->
