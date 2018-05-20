@@ -27,10 +27,6 @@ node_modules
 dist
 ```
 
-Add prettier to your project
-
-https://prettier.io/
-
 Create an app folder  in your project folder.
 Create index.js and index.css files.
 
@@ -130,6 +126,22 @@ module.exports = {
   "babel": {
     "presets": ["env", "react"]
   }
+```
+
+
+Add prettier to your project
+```
+npm install prettier --save-dev --save-exact
+npx prettier --write src/index.js
+npm install pretty-quick husky --save-dev
+```
+Then edit package.json
+```
+{
+  "scripts": {
+    "precommit": "pretty-quick --staged"
+  }
+}
 ```
 
 
