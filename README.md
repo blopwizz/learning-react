@@ -222,9 +222,8 @@ Install axios
 npm install --save axios
 ```
 
-Create a utils folder and a api.js file
-
-(app/utils/api.js)
+Create **/app/utils** folder.
+Create a **api.js** file.
 ```
 var axios = require("axios");
 
@@ -289,5 +288,5 @@ api.fetchPopularRepos(lang).then(
 UI 11:11
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1Nzk5NDI2NywxODUwOTA5NDEyXX0=
+eyJoaXN0b3J5IjpbMTA2NTM3MTYyMiwxODUwOTA5NDEyXX0=
 -->
