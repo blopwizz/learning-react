@@ -27,7 +27,12 @@ node_modules
 dist
 ```
 
-Create an app folder to write your code, with index.js and index.css files.
+Add prettier to your project
+
+https://prettier.io/
+
+Create an app folder  in your project folder.
+Create index.js and index.css files.
 
 (index.html)
 ```
