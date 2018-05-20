@@ -119,7 +119,7 @@ module.exports = {
  ```
  "scripts": {
     "start": "webpack-dev-server --open"
-  }
+  }
 ```
 
 ```
@@ -288,5 +288,5 @@ api.fetchPopularRepos(lang).then(
 UI 11:11
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA5ODI5MDMwNV19
+eyJoaXN0b3J5IjpbLTEwOTE4OTU4MDddfQ==
 -->
