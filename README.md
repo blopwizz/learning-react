@@ -147,7 +147,8 @@ Then edit package.json
 
 
 ### Define a new component
-
+Create a **/app/components** folder.
+Create a **Popular.js** file 
 ```
 var React = require("react");
 var PropTypes = require("prop-types");
@@ -288,5 +289,5 @@ api.fetchPopularRepos(lang).then(
 UI 11:11
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1MDkwOTQxMl19
+eyJoaXN0b3J5IjpbMTg1Nzk5NDI2NywxODUwOTA5NDEyXX0=
 -->
