@@ -132,7 +132,7 @@ module.exports = {
 Add prettier to your project
 ```
 npm install prettier --save-dev --save-exact
-npx prettier --write src/index.js
+npx prettier --write app/index.js
 npm install pretty-quick husky --save-dev
 ```
 Then edit package.json
@@ -288,5 +288,5 @@ api.fetchPopularRepos(lang).then(
 UI 11:11
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwOTE4OTU4MDddfQ==
+eyJoaXN0b3J5IjpbMTg1MDkwOTQxMl19
 -->
